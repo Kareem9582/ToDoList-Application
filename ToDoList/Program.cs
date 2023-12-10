@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlite("DataSource=app.db"));
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlite(@"DataSource=Data/app.db"));
 
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddEntityFrameworkStores<AppDbContext>()

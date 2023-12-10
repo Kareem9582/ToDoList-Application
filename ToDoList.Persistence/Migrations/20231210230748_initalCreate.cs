@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ToDoList.Migrations
+namespace ToDoList.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class initalCreate : Migration
