@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Api.Contracts;
+using ToDoList.Api.Services;
 using ToDoList.Context;
+using ToDoList.Domain;
+using ToDoList.Persistence.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +16,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlite(@"DataSource=Data/app.db"));
-
-builder.Services.AddIdentityCore<IdentityUser>()
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlite(@"DataSource=Data/app.sqlite"));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DomainEntryPoint).Assembly));
+builder.Services.AddIdentityCore<User>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();
+
+#region Add Services
+builder.Services.AddTransient<IToDoListService , ToDoListService>();
+#endregion
 
 var app = builder.Build();
 
@@ -33,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 
 app.Run();
