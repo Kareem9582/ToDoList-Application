@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using System.Reflection;
 using ToDoList.Context;
 using ToDoList.Domain.Helpers;
 using ToDoList.Domain.Queries;
@@ -19,7 +17,7 @@ namespace ToDoList.Domain.Handlers.Queries
         public async Task<IEnumerable<ToDoListItem>> Handle(SearchListQuery request, CancellationToken cancellationToken)
         {
             var conditions = FilterBuilderHelper.BuildCondition(request.filter);
-            return await _appDbContext.Items.Where(conditions).ToListAsync(cancellationToken: cancellationToken);
+            return await _appDbContext.Items.AsNoTracking().Where(conditions).ToListAsync(cancellationToken: cancellationToken);
         }
     }
 }
