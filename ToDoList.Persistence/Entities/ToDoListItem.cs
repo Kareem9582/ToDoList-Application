@@ -14,7 +14,7 @@ namespace ToDoList.Persistence.Entities
         public string ItemDescription { get; set; } = string.Empty;
 
         [Required]
-        public required User User { get; set; }
+        public required User? User { get; set; }
         [Required]
         public required string UserId { get; set; }
 
