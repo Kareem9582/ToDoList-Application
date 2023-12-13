@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 namespace ToDoList.Persistence.Entities
 {
@@ -8,6 +9,8 @@ namespace ToDoList.Persistence.Entities
         {
             Items = new List<ToDoListItem>();
         }
+
+        [JsonIgnore]
         public virtual ICollection<ToDoListItem> Items { get; set; }
     }
 }
