@@ -6,6 +6,10 @@ namespace ToDoList.Context
 {
     public class AppDbContext : IdentityDbContext<User>
     {
+        public AppDbContext()
+        {
+
+        }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         { 
             Database.EnsureCreated(); 
@@ -18,6 +22,6 @@ namespace ToDoList.Context
                 .WithMany(p => p.Items)
                 .HasForeignKey(op => op.UserId);
         }
-        public DbSet<ToDoListItem> Items { get; set; }
+        public virtual DbSet<ToDoListItem> Items { get; set; }
     }
 }

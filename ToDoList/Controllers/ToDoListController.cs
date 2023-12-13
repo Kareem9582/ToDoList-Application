@@ -186,5 +186,23 @@ namespace ToDoList.Api.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// This endpoint will throw an exception
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("CallException")]
+        public Task<IActionResult> CallException()
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }
