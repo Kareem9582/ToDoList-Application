@@ -15,7 +15,7 @@ namespace ToDoList.Domain.Handlers.Queries
         }
         public async Task<IEnumerable<ToDoListItem>> Handle(GetToDoItemsListQuery request, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Items.Where(item => item.User.UserName == request.userName.ToString()).ToListAsync();
+            return await _appDbContext.Items.AsNoTracking().Where(item => item.User.UserName == request.userName.ToString()).ToListAsync();
         }
     }
 }
