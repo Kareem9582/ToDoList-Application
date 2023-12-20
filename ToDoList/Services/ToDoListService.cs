@@ -35,9 +35,9 @@ namespace ToDoList.Api.Services
             return await _mediator.Send(new InsertToDoItemCommand(itemTitle, itemDescription, userName));
         }
 
-        public async Task<int> Update(Guid id, string itemTitle, string itemDescription, string userName)
+        public async Task<int> Update(Guid id, string itemTitle, string itemDescription, bool isCompleted, DateTime completionDate, string userName)
         {
-            return await _mediator.Send(new UpdateToDoItemCommand(id,itemTitle, itemDescription, userName));
+            return await _mediator.Send(new UpdateToDoItemCommand(id,itemTitle, itemDescription, isCompleted, completionDate, userName));
         }
 
         public async Task<int> Delete(Guid id, string userName)

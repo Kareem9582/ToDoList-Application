@@ -107,6 +107,8 @@ Resources
 
 ##Frontend
 
-- Create Frontend Application
-- Add Redux
-- Styling
+- Have an issue with first login. I need to refresh the page to get the data 
+- An Issue with the search with text change I needed to add the button 
+- Add Responseiveness to the application
+- Add Tests to the frontend 
+- Enhance the CSS 
