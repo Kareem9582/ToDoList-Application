@@ -19,6 +19,8 @@ namespace ToDoList.Domain.Handlers.Commends
             var item = listItems.FirstOrDefault(item => item.ItemId == request.Id && item.User?.UserName == request.UserName.ToString()) ?? throw new NotImplementedException();
             item.ItemTitle = request.ItemTitle;
             item.ItemDescription = request.ItemDescription;
+            item.IsCompleted = request.isCompleted;
+            item.CompletionDate = request.completionDate;
             return await _appDbContext.SaveChangesAsync();
         }
     }
