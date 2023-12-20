@@ -74,7 +74,21 @@ I wrote them as POC and I will work on them later when I have time.
 **Why you didn't test the Services in the API layer?**
 As it is one line of code I tested only the logic behind. however in standard situation I should test both Service and Domain layers.
 
-Resources
+#Frontend Questions and Answers
+
+**Why did you not create Features Structure?**
+The Application is small and handy and I was already late to deliver
+
+**Why did you not create Tests?**
+Never worked on it before, Happy to learn and apply it if I got extension to do it.
+
+**Why did not use any frontend common solution architecture?**
+As Backend Focused Engineer the N-Tier Architecture is closer to my mind/heart so splitting the application in Views/Models/Services is a simple stright way for a small application
+
+**Why did you not Redux?**
+I was very interested to try the fetch as it preduces less code and more flat structure
+
+#Resources
 
 - [MediatR](https://www.gofpattern.com/design-patterns/module6/benefits-pitfalls-mediatorPattern.php).
 
