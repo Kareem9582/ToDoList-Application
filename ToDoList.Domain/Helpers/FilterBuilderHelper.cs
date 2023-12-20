@@ -20,7 +20,7 @@ namespace ToDoList.Domain.Helpers
                     predicate = predicate.And(listItem => listItem.ItemTitle.Contains(item.Value));
                 else if(item.Key.ToLower() == "description")
                     predicate = predicate.And(listItem => listItem.ItemDescription.Contains(item.Value));
-                else if(item.Key.ToLower() == "completionDate")
+                else if(item.Key.ToLower() == "completiondate")
                     predicate = predicate.And(listItem => listItem.CompletionDate <= Convert.ToDateTime(item.Value));
             }
             return predicate;
