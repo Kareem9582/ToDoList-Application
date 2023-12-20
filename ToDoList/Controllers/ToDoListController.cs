@@ -106,7 +106,7 @@ namespace ToDoList.Api.Controllers
             if (string.IsNullOrEmpty(User?.Identity?.Name))
                 return Problem("No Logged User Found");
 
-            var result = await _toDoListService.Update(item.Id, item.Title, item.Description, User?.Identity?.Name);
+            var result = await _toDoListService.Update(item.Id, item.Title, item.Description,item.IsCompleted,item.CompletionDate, User?.Identity?.Name);
             if (result == 1)
                 return StatusCode((int)HttpStatusCode.Accepted);
             return Problem("Unkown Problem Happend");
@@ -175,7 +175,7 @@ namespace ToDoList.Api.Controllers
         /// </remarks>
         /// <param name="Filter">The Search Filter</param>
         /// <returns>List of items that Matches the search</returns>
-        [HttpGet("Search")]
+        [HttpPost("Search")]
         public async Task<IActionResult> Search([FromBody] Filter filter)
         {
             if (string.IsNullOrEmpty(User?.Identity?.Name))
