@@ -16,7 +16,9 @@ namespace ToDoList.Domain.Handlers.Commends
         public async Task<int> Handle(UpdateToDoItemCommand request, CancellationToken cancellationToken)
         {
             var listItems = _appDbContext.Items.Include(item => item.User).ToList();
-            var item = listItems.FirstOrDefault(item => item.ItemId == request.Id && item.User?.UserName == request.UserName.ToString()) ?? throw new NotImplementedException();
+            var item = listItems.FirstOrDefault(item => item.ItemId == request.Id && item.User?.UserName == request.UserName.ToString());
+            if (item == null)
+                return 0;
             item.ItemTitle = request.ItemTitle;
             item.ItemDescription = request.ItemDescription;
             item.IsCompleted = request.isCompleted;

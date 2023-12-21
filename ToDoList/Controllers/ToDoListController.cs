@@ -109,6 +109,9 @@ namespace ToDoList.Api.Controllers
             var result = await _toDoListService.Update(item.Id, item.Title, item.Description,item.IsCompleted,item.CompletionDate, User?.Identity?.Name);
             if (result == 1)
                 return StatusCode((int)HttpStatusCode.Accepted);
+            else if (result == 0)
+                return NotFound("No Item found with this Id");
+
             return Problem("Unkown Problem Happend");
         }
 
@@ -135,6 +138,9 @@ namespace ToDoList.Api.Controllers
             var result = await _toDoListService.Delete(id, User?.Identity?.Name);
             if (result == 1)
                 return StatusCode((int)HttpStatusCode.Accepted);
+            else if (result == 0)
+                return NotFound("No Item found with this Id");
+
             return Problem("Unkown Problem Happend");
         }
 
@@ -160,7 +166,10 @@ namespace ToDoList.Api.Controllers
             var result = await _toDoListService.MarkAsComplete(id, User?.Identity?.Name);
             if (result == 1)
                 return StatusCode((int)HttpStatusCode.Accepted);
-            return Problem("Unkown Problem Happend");
+            else if (result == 0)
+                return NotFound("No Item found with this Id");
+            
+            return Problem("Unknown Problem Happend");
         }
         #endregion
 

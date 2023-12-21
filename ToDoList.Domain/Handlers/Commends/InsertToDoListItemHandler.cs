@@ -13,9 +13,11 @@ namespace ToDoList.Domain.Handlers.Commends
             _appDbContext = appDbContext;
         }
 
-        public Task<int> Handle(InsertToDoItemCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(InsertToDoItemCommand request, CancellationToken cancellationToken)
         {
-            var user  = _appDbContext.Users.FirstOrDefault(x =>x.UserName == request.UserName) ?? throw new NotImplementedException();
+            var user = _appDbContext.Users.FirstOrDefault(x => x.UserName == request.UserName);
+            if (user == null)
+                return 0;
             var result = _appDbContext.Items.AddAsync(new ToDoListItem { 
                 UserId = user.Id,
                 ItemId = Guid.NewGuid(),
@@ -25,7 +27,7 @@ namespace ToDoList.Domain.Handlers.Commends
                 User = null
             });
 
-           return _appDbContext.SaveChangesAsync();
+           return await _appDbContext.SaveChangesAsync();
         }
     }
 }
