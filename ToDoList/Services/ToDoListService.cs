@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using System.Runtime.InteropServices;
 using ToDoList.Api.Contracts;
 using ToDoList.Api.Models;
 using ToDoList.Domain.Commands;
@@ -52,8 +53,23 @@ namespace ToDoList.Api.Services
 
         public async Task<IEnumerable<GetItemModel>> Search(Filter filter, string userName)
         {
-            var result = await _mediator.Send(new SearchListQuery(filter,userName));
+            
+            var cleanedFilter = CleanFilter(filter);
+            var result = await _mediator.Send(new SearchListQuery(cleanedFilter, userName));
             return _mapper.Map<IEnumerable<GetItemModel>>(result);
+        }
+
+        private Filter CleanFilter(Filter filter)
+        {
+            Dictionary<string, string> validatedFilterlist = new Dictionary<string, string>();
+            foreach (var item in filter.FiltersList)
+            {
+                if (!string.IsNullOrEmpty(item.Value))
+                    validatedFilterlist.Add(item.Key, item.Value);
+            }
+            var validatedFilter = new Filter();
+            validatedFilter.FiltersList = validatedFilterlist;
+            return validatedFilter;
         }
     }
 }

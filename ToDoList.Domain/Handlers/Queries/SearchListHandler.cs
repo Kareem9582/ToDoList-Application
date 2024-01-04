@@ -17,7 +17,9 @@ namespace ToDoList.Domain.Handlers.Queries
         public async Task<IEnumerable<ToDoListItem>> Handle(SearchListQuery request, CancellationToken cancellationToken)
         {
             var conditions = FilterBuilderHelper.BuildCondition(request.filter);
-            return await _appDbContext.Items.AsNoTracking().Where(conditions).ToListAsync(cancellationToken: cancellationToken);
+            if(conditions != null)
+                return await _appDbContext.Items.AsNoTracking().Where(conditions).ToListAsync(cancellationToken: cancellationToken);
+            return await _appDbContext.Items.AsNoTracking().ToListAsync(cancellationToken: cancellationToken);
         }
     }
 }
